@@ -50,14 +50,9 @@ class App extends React.Component {
       ]
       };
       this.addTrack=this.addTrack.bind(this);
+      this.removeTrack=this.removeTrack.bind(this);
     }
 
-  removeTrack(track) {
-    let trackLocation = this.state.playlistTracks
-
-    trackLocation.filter(queryTrack => queryTrack.id !== track.id)
-    this.setState({playlistTracks: this.state.playlistTracks});
-  }
 /* Searches the list of playlist tracks for an id 
    if id isn't found adds the track to the playlist
 */
@@ -69,6 +64,21 @@ class App extends React.Component {
     this.setState({playlistTracks: this.state.playlistTracks})
   }  
 
+/* Remove track // takes in a track 
+                   searches the plalist for that track
+                   removes the track from the playlist (filter js tool)
+                   resets the playlistTracks state
+*/  
+
+  removeTrack(track) {
+    console.log("track filtered")
+    console.log(track.id)
+    const tracks = this.state.playlistTracks.filter(queryTrack => queryTrack.id !== track.id)
+    
+    this.setState({playlistTracks: tracks})
+
+  }
+
   render () {
   return (
 <div>
@@ -79,8 +89,8 @@ class App extends React.Component {
       <SearchResults SearchResults={this.state.SearchResults}
                      onAdd={this.addTrack}/> 
        <Playlist playlistName={this.state.playlistName}
-                 playlistTracks={this.state.playlistTracks} 
-                 onRemove={this.removeTrack} />  
+                 playlistTracks={this.state.playlistTracks}
+                 onRemove={this.removeTrack}  />  
     </div>
   </div>
 </div>
