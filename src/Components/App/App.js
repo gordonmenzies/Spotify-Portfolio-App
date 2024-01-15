@@ -52,6 +52,8 @@ class App extends React.Component {
       this.addTrack=this.addTrack.bind(this);
       this.removeTrack=this.removeTrack.bind(this);
       this.updatePlaylistName=this.updatePlaylistName.bind(this);
+      this.savePlaylist=this.savePlaylist.bind(this);
+      this.search=this.search.bind(this);
     }
 
 /* Searches the list of playlist tracks for an id 
@@ -90,19 +92,38 @@ class App extends React.Component {
       this.setState({playlistName: name})
     }
 
+    /* Save playlist generates an array of uri values from the playlist 
+                     tracks property.
+                     pass the trackURI array and playlistName to a method
+                     that will save the user's playlist to their account.
+                     links the app with someone's personal spotify account.
+    */
+
+    savePlaylist()  {
+      alert("method is linked to the button correctly")
+      const trackUris = this.state.playlistTracks.map(track => track.uri);
+    }
+
+    /* Sources tracks from the Spotify API and reveals them on screen
+    */
+
+    search(search) {
+      console.log(search)
+    }
   render () {
   return (
 <div>
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
   <div className="App">
-    <SearchBar />
+    <SearchBar onSearch={this.search}/>
     <div className="App-playlist">
       <SearchResults SearchResults={this.state.SearchResults}
                      onAdd={this.addTrack}/> 
        <Playlist playlistName={this.state.playlistName}
                  playlistTracks={this.state.playlistTracks}
                  onRemove={this.removeTrack}  
-                 onChange={this.updatePlaylistName}/>  
+                 onChange={this.updatePlaylistName}
+                 onSave={this.savePlaylist}/>  
     </div>
   </div>
 </div>
