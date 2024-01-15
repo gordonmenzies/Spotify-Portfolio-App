@@ -18,8 +18,8 @@ search() {
     this.props.onSearch(this.state.search)
 }
 
-handleTermChange(event) {
-    this.setState({search: event.target.value})
+handleTermChange(term) {
+    this.setState({search: term.target.value})
 }
 
 render () {
